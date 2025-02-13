@@ -50,10 +50,27 @@ const deleteBook = async (req, res) => {
     }
 };
 
+const searchbook = async (req, res) => {
+    try {
+        const book_name = req.body.book_name;
+        const book = await Book.findOne({ book_name });
+
+        if (!book) {
+            return res.status(404).send('Book not found');
+        }
+
+        res.render('book/search', { book });
+    } catch (err) {
+        res.status(500).send('Error retrieving books.');
+    }
+};
+
+
 module.exports = {
     getAllBooks,
     addBook,
     renderEditBookForm,
     updateBook,
     deleteBook,
+    searchbook
 };

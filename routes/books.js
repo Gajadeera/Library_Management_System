@@ -20,4 +20,7 @@ router.post('/edit/:id', bookController.updateBook);
 // Delete a book
 router.post('/delete/:id', bookController.deleteBook);
 
+// Search a book
+router.get('/search', bookController.searchbook)
+
 module.exports = router;
