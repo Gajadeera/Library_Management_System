@@ -52,8 +52,9 @@ const deleteBook = async (req, res) => {
 
 const searchbook = async (req, res) => {
     try {
-        const book_name = req.body.book_name;
-        const book = await Book.findOne({ book_name });
+        const book_name = req.query.title;
+
+        const book = await Book.findOne({ title: new RegExp(`^${book_name}$`, 'i') });
 
         if (!book) {
             return res.status(404).send('Book not found');

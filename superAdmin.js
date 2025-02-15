@@ -11,7 +11,7 @@ const createSuperAdmin = async () => {
             socketTimeoutMS: 45000
         });
 
-        console.log('✅ Database connected...');
+        console.log('Database connected...');
 
         const hashedPassword = await bcrypt.hash('noKidding123', 10);
 

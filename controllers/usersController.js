@@ -81,6 +81,25 @@ const deleteUser = async (req, res) => {
     res.redirect('/users', { user: deletedUser });
 };
 
+
+const logout = async (req, res) => {
+    try {
+        req.session.destroy((err) => {
+            if (err) {
+                console.error('Error destroying session:', err);
+                return res.status(500).send('Failed to log out');
+            }
+
+            res.redirect('/login'); // Redirect to login page after logout
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
+
 module.exports = {
     deleteUser,
     showDeleteUserForm,
@@ -91,6 +110,7 @@ module.exports = {
     getUserProfile,
     showCreateUserForm,
     createUser,
-    getAllUsers
+    getAllUsers,
+    logout
 
 }

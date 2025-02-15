@@ -12,5 +12,6 @@ router.get('/:id/edit', usersController.showEditUserForm);
 router.put('/:id', usersController.EditUser);
 router.get('/:id/delete', usersController.showDeleteUserForm);
 router.delete('/id', usersController.deleteUser);
+router.get('/logout', usersController.logout);
 
 module.exports = router;
