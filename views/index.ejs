@@ -1,22 +1,23 @@
 <%- include('partials/header') %>
 
-    <body class="bg-light">
 
-        <div class="container vh-100 d-flex flex-column justify-content-center align-items-center text-center">
+    <div class="container vh-100 d-flex flex-column justify-content-center align-items-center text-center">
 
-            <div class="mb-4">
-                <h1 class="mb-3">Welcome to Library Management System</h1>
-                <p class="text-muted">Manage books, users, and borrow requests with ease!</p>
-            </div>
-
-            <form action="/books/search" method="GET" class="mb-4">
-                <div class="input-group">
-                    <input type="text" class="form-control form-control-lg" placeholder="Search for a book..."
-                        name="query" required>
-                    <button type="submit" class="btn btn-primary btn-lg">Search</button>
-                </div>
-            </form>
+        <div class="mb-4">
+            <h1 class="mb-3">Welcome to Library Management System</h1>
+            <p class="text-muted">Manage books, users, and borrow requests with ease!</p>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    <%- include('partials/footer') %>
+
+        <form action="/books/search" method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" class="form-control form-control-lg" placeholder="Search for a book..." name="query"
+                    required>
+                <button type="submit" class="btn btn-primary btn-lg">Search</button>
+            </div>
+        </form>
+    </div>
+
+
+    <footer class="mt-auto">
+        <%- include('partials/footer') %>
+    </footer>

@@ -1,0 +1,44 @@
+html,
+body {
+    height: 100% !important;
+    background-color: #d4f3bf !important;
+    color: #a12424 !important;
+}
+
+.navbar {
+    background-color: #a98afc !important;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: #ffffff !important;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+}
+
+.navbar-toggler-icon {
+    background-color: #ffffff !important;
+}
+
+.navbar-toggler {
+    border-color: #ffffff !important;
+}
+
+footer {
+    background: #a98afc !important;
+    color: #ffffff !important;
+    padding: 0.5rem 0 !important;
+    text-align: center !important;
+    width: 100% !important;
+    position: relative !important;
+}
+
+.form-inline .form-label {
+    min-width: 80px;
+}
+
+.form-inline .form-control {
+    flex-grow: 1;
+    margin-left: 10px;
+}

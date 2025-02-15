@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../partials/header') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
 
-<body class="bg-light">
 
     <div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
         <div class="text-center">
@@ -38,18 +30,36 @@
                             <li class="list-group-item"><a href="/manageBooks" class="text-decoration-none">Manage
                                     Library Inventory</a></li>
                         </ul>
-                        <% } else if (user.role==='librarian' ) { %>
+                        <% } else if (user.role==='superAdmin' ) { %>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="../books/add" class="text-decoration-none">Add New
-                                        Book</a></li>
-                                <li class="list-group-item"><a href="/approveRequests"
-                                        class="text-decoration-none">Approve/Deny Borrow Requests</a></li>
+                                <li class="list-group-item"><a href="/users" class="text-decoration-none">Add
+                                        Admin</a></li>
+                                <li class="list-group-item"><a href="/users" class="text-decoration-none">Manage
+                                        Users</a></li>
+                                <li class="list-group-item"><a href="/viewReports" class="text-decoration-none">View
+                                        Reports</a></li>
                                 <li class="list-group-item"><a href="/manageBooks" class="text-decoration-none">Manage
-                                        Book Inventory</a></li>
-                                <li class="list-group-item"><a href="/viewRequests" class="text-decoration-none">View
-                                        All User Requests</a></li>
+                                        Library Inventory</a></li>
                             </ul>
-                            <% } %>
+                            <% } else if (user.role==='librarian' ) { %>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><a href="../books/add" class="text-decoration-none">Add
+                                            New
+                                            Book</a></li>
+                                    <li class="list-group-item"><a href="../books/Update"
+                                            class="text-decoration-none">Update the Book</a></li>
+                                    <li class="list-group-item"><a href="../books/delete"
+                                            class="text-decoration-none">Delete Book</a></li>
+                                    <li class="list-group-item"><a href="/approveRequests"
+                                            class="text-decoration-none">Approve/Deny Borrow Requests</a></li>
+                                    <li class="list-group-item"><a href="/manageBooks"
+                                            class="text-decoration-none">Manage
+                                            Book Inventory</a></li>
+                                    <li class="list-group-item"><a href="/viewRequests"
+                                            class="text-decoration-none">View
+                                            All User Requests</a></li>
+                                </ul>
+                                <% } %>
             </div>
         </div>
 
@@ -59,7 +69,6 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+    <footer class="mt-auto">
+        <%- include('../partials/footer') %>
+    </footer>
