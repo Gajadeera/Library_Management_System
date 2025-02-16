@@ -1,49 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../partials/header') %>
+    <div class="container vh-100 d-flex flex-column">
+        <div class="container py-5">
+            <div class="text-center mb-4">
+                <h1 class="mb-3">Books</h1>
+                <% if (user && (user.role==='librarian' || user.role==='admin' || user.role==='superAdmin' )) { %>
+                    <a href="/books/add" class="btn btn-primary">Add New Book</a>
+                    <% } %>
+            </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body class="bg-light">
-
-    <div class="container py-5">
-        <div class="text-center mb-4">
-            <h1 class="mb-3">Books</h1>
-            <a href="/books/add" class="btn btn-primary">Add New Book</a>
-        </div>
-
-        <div class="card shadow-lg">
-            <div class="card-body">
-                <ul class="list-group">
-                    <% books.forEach(book=> { %>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong>
-                                    <%= book.title %>
-                                </strong> by <em>
-                                    <%= book.author %>
-                                </em>
-                            </div>
-                            <div>
-                                <a href="/books/edit/<%= book._id %>" class="btn btn-sm btn-warning">Edit</a>
-                                <form action="/books/delete/<%= book._id %>" method="POST" class="d-inline">
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                </form>
-                            </div>
-                        </li>
-                        <% }); %>
-                </ul>
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <ul class="list-group">
+                        <% books.forEach(book=> { %>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>
+                                        <%= book.title %>
+                                    </strong> by <em>
+                                        <%= book.author %>
+                                    </em>
+                                </div>
+                                <div>
+                                    <% if (user) { %>
+                                        <% if (user.role==='user' ) { %>
+                                            <a href="/books/borrow/<%= book._id %>"
+                                                class="btn btn-sm btn-success">Borrow</a>
+                                            <% } else if (user.role==='librarian' || user.role==='admin' ||
+                                                user.role==='superAdmin' ) { %>
+                                                <a href="/books/edit/<%= book._id %>"
+                                                    class="btn btn-sm btn-warning">Edit</a>
+                                                <form action="/books/delete/<%= book._id %>" method="POST"
+                                                    class="d-inline">
+                                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                </form>
+                                                <% } %>
+                                                    <% } %>
+                                </div>
+                            </li>
+                            <% }); %>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+    <footer class="mt-auto">
+        <%- include('../partials/footer') %>
+    </footer>

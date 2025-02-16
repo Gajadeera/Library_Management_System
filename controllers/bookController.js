@@ -1,9 +1,12 @@
 const Book = require('../models/book');
+const User = require('../models/user');
+const session = require('express-session');
 
 const getAllBooks = async (req, res) => {
     try {
         const books = await Book.find();
-        res.render('book/index', { books });
+        res.render('book/index', { books, user: req.session.user });
+        console.log(req.session.user);
     } catch (err) {
         res.status(500).send('Error retrieving books.');
     }

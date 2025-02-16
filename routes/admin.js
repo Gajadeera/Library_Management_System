@@ -2,18 +2,19 @@
 const express = require('express');
 const router = express.Router();
 const isSuperAdmin = require('../middleware/isSuperAdmin');
+const adminConroller = require('../controllers/adminController')
 
-// Apply middleware to restrict access to super admins
-router.get('/dashboard', isSuperAdmin, (req, res) => {
-    res.render('admin/dashboard');
-});
 
-router.get('/createAdmin', isSuperAdmin, (req, res) => {
-    res.render('admin/createAdmin');
-});
+// // Apply middleware to restrict access to super admins
+// router.get('/', isSuperAdmin, (req, res) => {
+//     res.render('admin/dashboard');
+// });
 
-router.post('/createAdmin', isSuperAdmin, (req, res) => {
-    // Logic to create a new admin
-});
+router.get('/createAdmin', isSuperAdmin, adminConroller.showCreateAdminForm);
+
+router.post('/createAdmin', isSuperAdmin, adminConroller.createAdmin);
+
+
+
 
 module.exports = router;

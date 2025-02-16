@@ -90,7 +90,7 @@ const logout = async (req, res) => {
                 return res.status(500).send('Failed to log out');
             }
 
-            res.redirect('/login'); // Redirect to login page after logout
+            res.redirect('/');
         });
     } catch (error) {
         console.error(error);

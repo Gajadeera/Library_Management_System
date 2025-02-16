@@ -1,50 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../partials/header') %>
+    <div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User</title>
-</head>
+        <form action="/users/<%=user._id %>?_method=PUT" method="post">
 
-<body>
+            <div>
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required
+                    value="<%=user.name %>">
+            </div>
 
-    <form action="/users/<%=user._id %>?_method=PUT" method="post">
+            <div>
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required
+                    value="<%=user.email %>">
+            </div>
 
-        <div>
-            <label for="name" class="form-label">Name</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required
-                value="<%=user.name %>">
-        </div>
+            <div>
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" class="form-control"
+                    placeholder="Enter your password" required>
+            </div>
 
-        <div>
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required
-                value="<%=user.email %>">
-        </div>
+            <div>
+                <label for="role" class="form-label">Role</label>
+                <select name="role" id="role" class="form-select">
+                    <option value="user">User</option>
+                    <option value="librarian">Librarian</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
 
-        <div>
-            <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password"
-                required>
-        </div>
-
-        <div>
-            <label for="role" class="form-label">Role</label>
-            <select name="role" id="role" class="form-select">
-                <option value="user">User</option>
-                <option value="librarian">Librarian</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
-
-        <div>
-            <button type="submit">Submit</button>
-        </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
 
 
-    </form>
+        </form>
 
-</body>
+    </div>
 
-</html>
+
+    <footer class="mt-auto">
+        <%- include('../partials/footer') %>
+    </footer>

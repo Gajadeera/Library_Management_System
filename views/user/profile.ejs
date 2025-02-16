@@ -1,7 +1,4 @@
 <%- include('../partials/header') %>
-
-
-
     <div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
         <div class="text-center">
             <h2 class="mb-3">Welcome, <span style="text-transform: uppercase;">
@@ -32,7 +29,8 @@
                         </ul>
                         <% } else if (user.role==='superAdmin' ) { %>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="/users" class="text-decoration-none">Add
+                                <li class="list-group-item"><a href="../admin/createAdmin"
+                                        class="text-decoration-none">Add
                                         Admin</a></li>
                                 <li class="list-group-item"><a href="/users" class="text-decoration-none">Manage
                                         Users</a></li>
