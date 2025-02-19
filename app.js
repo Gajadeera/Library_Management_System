@@ -37,7 +37,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', async (req, res) => {
     try {
-        const books = await Book.find().sort({ _id: 1 }); // Fetch all books in order
+        const books = await Book.find().sort({ _id: 1 });
         res.render('index', { books });
     } catch (error) {
         console.error('Error fetching books:', error);
