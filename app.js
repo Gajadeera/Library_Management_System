@@ -6,6 +6,7 @@ const userRoutes = require('./routes/users');
 const bookRoutes = require('./routes/books');
 const adminRoutes = require('./routes/admin');
 const borrowRoutes = require('./routes/borrow');
+const reportRoutes = require('./routes/report');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const Book = require('./models/book');
@@ -35,21 +36,24 @@ db.once('open', () => {
 
 app.set('view engine', 'ejs');
 
-app.get('/', async (req, res) => {
+
+app.get("/", async (req, res) => {
     try {
-        const books = await Book.find().sort({ _id: 1 });
-        res.render('index', { books });
-    } catch (error) {
-        console.error('Error fetching books:', error);
-        res.status(500).send('Internal Server Error');
+        const books = await Book.find();
+        const shuffledBooks = books.sort(() => 0.5 - Math.random());
+        const selectedBooks = shuffledBooks.slice(0, 5);
+        res.render("index", { books: selectedBooks, user: req.session.user });
+    } catch (err) {
+
+        res.status(500).send("Server Error");
     }
 });
-
 
 app.use('/users', userRoutes);
 app.use('/books', bookRoutes);
 app.use('/admin', adminRoutes);
 app.use('/borrow', borrowRoutes);
+app.use('/report', reportRoutes);
 
 app.use((req, res, next) => {
     console.log(`Request URL: ${req.url}`);

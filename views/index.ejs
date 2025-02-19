@@ -2,33 +2,35 @@
 
     <div class="container vh-100 d-flex flex-column justify-content-center align-items-center text-center">
         <div class="text-center mb-4">
-            <h1 class="mb-3">Welcome to Library Management System</h1>
+            <h1 class="mb-3 landing-page-title">Welcome to Library Management System</h1>
             <p class="text-muted">Manage books, users, and borrow requests with ease!</p>
         </div>
 
-        <div class="Img_container d-flex flex-wrap justify-content-center gap-4">
-            <% books.forEach((book, index)=> { %>
-                <% if (index>= 5) { %>
-                    <div class="item text-center">
-                        <img src="<%= book.imageUrl %>" alt="<%= book.title %>" class="img-fluid rounded"
-                            style="max-width: 200px;">
-                        <h5 class="mt-2">
-                            <%= book.title %>
-                        </h5>
-                        <p class="text-muted">
-                            <%= book.author %>
-                        </p>
-                        <form action="/borrow" method="POST" class="mt-2 w-100">
-                            <input type="hidden" name="bookId" value="<%= book._id %>"> <!-- Use actual book ID -->
-                            <button type="submit" class="btn btn-primary w-100">Borrow</button>
-                        </form>
-                    </div>
-                    <% } %>
-                        <% }); %>
+        <!-- Message Box (Hidden Initially) -->
+        <div id="messageBox"
+            style="display: none; padding: 10px; margin-bottom: 10px; border-radius: 5px; max-width: 400px; text-align: center; color: white;">
+            <span id="messageText"></span>
         </div>
 
+        <div class="Img_container d-flex flex-wrap justify-content-center gap-4">
+            <% books.forEach(book=> { %>
+                <div class="item text-center">
+                    <img src="<%= book.imageUrl || 'https://via.placeholder.com/150' %>" alt="<%= book.title %>"
+                        class="img-fluid rounded book-image">
+                    <h5 class="mt-2">
+                        <%= book.title %>
+                    </h5>
+                    <p class="text-muted">
+                        <%= book.author %>
+                    </p>
+                    <form action="/borrow" method="POST" class="mt-2 w-100">
+                        <input type="hidden" name="bookId" value="<%= book._id %>">
+                        <button type="submit" class="btn btn-primary w-100 borrow-button">Borrow</button>
+                    </form>
+                </div>
+                <% }); %>
+        </div>
     </div>
-
 
     <footer class="mt-auto">
         <%- include('partials/footer') %>

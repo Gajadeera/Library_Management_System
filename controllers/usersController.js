@@ -1,109 +1,92 @@
 const User = require('../models/user');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
-
 
 const getAllUsers = async (req, res) => {
     const users = await User.find({});
-    res.render('user/index', { users });
+    res.render('user/index', { users, user: req.session.user });
+    console.log(req.session.user);
 };
 
 const createUser = async (req, res) => {
-    const newUser = new User(req.body);
-    newUser.password = await bcrypt.hash(newUser.password, 10);
-    await newUser.save();
-    res.redirect(`users/${newUser._id}`);
+    try {
+        const newUser = new User(req.body);
+        await newUser.save();
+        res.redirect(`users/${newUser._id}`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error creating user');
+    }
 };
 
-const showCreateUserForm = (req, res) => {
-    res.render('user/new');
-};
+const showCreateUserForm = (req, res) => res.render('user/new');
 
 const getUserProfile = async (req, res) => {
-    const { id } = req.params;
-    const user = await User.findById(id);
+    const user = await User.findById(req.params.id);
     res.render('user/profile', { user });
 };
 
-const showLoginForm = (req, res) => {
-    res.render('user/login');
-};
+const showLoginForm = (req, res) => res.render('user/login');
 
 const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.send('Email or password incorrect');
-        }
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.send('Email or password incorrect');
-        }
+        const user = await User.authenticate(req.body.email, req.body.password);
+        if (!user) return res.send('Email or password incorrect');
+
         req.session.user = user;
-        res.render('user/profile', { user: req.session.user });
+        res.render('user/profile', { user });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
     }
 };
 
-
 const showEditUserForm = async (req, res) => {
-    const { id } = req.params;
-    const user = await User.findById(id);
+    const user = await User.findById(req.params.id);
     res.render('user/edit', { user });
-}
+};
 
-const EditUser = async (req, res) => {
-    const { id } = req.params;
+const editUser = async (req, res) => {
+    try {
+        const { id } = req.params;
 
-    if (req.body.password) {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        req.body.password = hashedPassword;
+        if (req.body.password) {
+            req.body.password = await bcrypt.hash(req.body.password, 10);
+        }
+
+        await User.findByIdAndUpdate(id, req.body, { new: true });
+        const updatedUser = await User.findById(id);
+
+        res.render('user/profile', { user: updatedUser });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error updating user');
     }
-    await User.updateOne({ _id: id }, { $set: req.body });
-
-    const userAfterUpdate = await User.findById(id);
-
-    res.render('user/profile', { user: userAfterUpdate });
 };
 
 const showDeleteUserForm = async (req, res) => {
-    const { id } = req.params;
-    const user = await User.findById(id);
+    const user = await User.findById(req.params.id);
     res.render('user/delete', { user });
 };
 
 const deleteUser = async (req, res) => {
-    const { id } = req.params;
-    const deletedUser = await User.findByIdAndDelete(id);
-    res.redirect('/users', { user: deletedUser });
+    await User.findByIdAndDelete(req.params.id);
+    res.redirect('/users');
 };
-
 
 const logout = async (req, res) => {
-    try {
-        req.session.destroy((err) => {
-            if (err) {
-                console.error('Error destroying session:', err);
-                return res.status(500).send('Failed to log out');
-            }
-
-            res.redirect('/');
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Error destroying session:', err);
+            return res.status(500).send('Failed to log out');
+        }
+        res.redirect('/');
+    });
 };
-
-
 
 module.exports = {
     deleteUser,
     showDeleteUserForm,
-    EditUser,
+    editUser,
     showEditUserForm,
     login,
     showLoginForm,
@@ -112,5 +95,4 @@ module.exports = {
     createUser,
     getAllUsers,
     logout
-
-}
+};

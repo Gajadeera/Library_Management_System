@@ -4,7 +4,38 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-<!-- <script src="/Content/script.js"></script> -->
+<script>
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const successMessage = urlParams.get('success');
+    const errorMessage = urlParams.get('error');
+
+    if (successMessage || errorMessage) {
+        const messageBox = document.getElementById("messageBox");
+        const messageText = document.getElementById("messageText");
+
+        if (successMessage) {
+            messageBox.style.backgroundColor = "green";
+            messageText.innerText = successMessage;
+        } else if (errorMessage) {
+            messageBox.style.backgroundColor = "red";
+            messageText.innerText = errorMessage;
+        }
+
+        messageBox.style.display = "block"; // Show message box
+
+        // Remove query parameters from the URL without reloading the page
+        const newUrl = window.location.pathname;
+        window.history.replaceState(null, "", newUrl);
+
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            messageBox.style.display = "none";
+        }, 5000);
+    }
+</script>
+
+
 
 </body>
 

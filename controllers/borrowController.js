@@ -4,7 +4,7 @@ const Book = require('../models/book');
 
 const makeBorrwow = async (req, res) => {
     if (!req.session.user) {
-        return res.redirect('/?message=Please log in to borrow a book');
+        return res.redirect('/?error=Please log in to borrow a book');
     }
 
     try {
@@ -14,7 +14,7 @@ const makeBorrwow = async (req, res) => {
         // Check if book exists
         const book = await Book.findById(bookId);
         if (!book) {
-            return res.status(404).send("Book not found");
+            return res.redirect('/?error=Book not found');
         }
 
         // Create new borrow record
@@ -29,10 +29,10 @@ const makeBorrwow = async (req, res) => {
 
         await newBorrow.save();
         console.log('Borrow record saved successfully:', newBorrow);
-        res.redirect('/?message=Book borrowed successfully!');
+        return res.redirect('/?success=Book borrowed successfully!');
     } catch (error) {
         console.error('Error saving borrow record:', error);
-        res.status(500).send("Error processing request");
+        return res.redirect('/?error=Error processing request');
     }
 };
 

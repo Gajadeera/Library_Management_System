@@ -26,7 +26,11 @@
                         <a class="nav-link" href="/books">My Books</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/users">Users</a>
+                        <% if (typeof user !=='undefined' ) { %>
+                            <% if ( user.role==='admin' || user.role==='superAdmin' ) { %>
+                                <a class="nav-link" href="/users">Users</a>
+                                <% } %>
+                                    <% } %>
                     </li>
                 </ul>
 

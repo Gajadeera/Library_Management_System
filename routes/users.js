@@ -10,7 +10,7 @@ router.get('/new', usersController.showCreateUserForm);
 router.post('/', usersController.createUser);
 router.get('/:id', usersController.getUserProfile);
 router.get('/:id/edit', usersController.showEditUserForm);
-router.put('/:id', usersController.EditUser);
+router.put('/:id', usersController.editUser);
 router.get('/:id/delete', usersController.showDeleteUserForm);
 router.delete('/:id', usersController.deleteUser);
 

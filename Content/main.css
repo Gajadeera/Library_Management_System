@@ -1,15 +1,21 @@
 :root {
     --primary-color: #0040ca;
     --text-color: #ffffff;
+    --landing-page-text-color: #666;
     --navbar-brand-color: #c7fa10;
-    --background-image: url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    --background-image: url('/Content/imgs/img3.avif');
     --font-family: "Zen Dots", sans-serif;
+}
+
+.landing-page-title {
+    color: var(--landing-page-text-color) !important;
 }
 
 html,
 body {
     height: 100% !important;
     background-image: var(--background-image);
+    background-size: auto;
     color: var(--text-color) !important;
     font-family: var(--font-family) !important;
 }
@@ -18,7 +24,8 @@ body {
     background-color: var(--primary-color) !important;
 }
 
-.navbar .navbar-nav .nav-link {
+.navbar .navbar-nav .nav-link,
+.navbar-toggler-icon {
     color: var(--text-color) !important;
 }
 
@@ -26,10 +33,6 @@ body {
     color: var(--navbar-brand-color) !important;
     font-size: xx-large;
     font-family: "Zen Dots", serif;
-}
-
-.navbar-toggler-icon {
-    background-color: var(--text-color) !important;
 }
 
 .navbar-toggler {
@@ -56,16 +59,45 @@ footer {
 
 .Img_container {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
     align-items: center;
 }
 
 .item {
-    margin: 10px 0;
+    width: 200px;
+    height: 350px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.item img {
-    width: 350px;
-    padding: 5%;
-    height: 300px;
+.book-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+}
+
+.item h5 {
+    min-height: 40px;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.item p {
+    min-height: 20px;
+    color: #666;
+}
+
+.borrow-button {
+    width: 100%;
 }

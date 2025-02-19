@@ -1,12 +1,10 @@
 const Book = require('../models/book');
-const User = require('../models/user');
-const session = require('express-session');
+
 
 const getAllBooks = async (req, res) => {
     try {
         const books = await Book.find();
         res.render('book/index', { books, user: req.session.user });
-        console.log(req.session.user);
     } catch (err) {
         res.status(500).send('Error retrieving books.');
     }
@@ -27,7 +25,7 @@ const renderEditBookForm = async (req, res) => {
     try {
         const book = await Book.findById(req.params.id);
         if (!book) return res.status(404).send('Book not found.');
-        res.render('books/editBook', { book });
+        res.render('book/edit', { book });
     } catch (err) {
         res.status(500).send('Error loading edit form.');
     }

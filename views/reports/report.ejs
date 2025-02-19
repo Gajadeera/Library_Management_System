@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+    <div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
+
+        <h1>Borrowing Trends</h1>
+        <ul>
+            <% borrowingTrends.forEach(trend=> { %>
+                <li>Book ID: <%= trend._id %>, Total Borrows: <%= trend.totalBorrows %>
+                </li>
+                <% }); %>
+        </ul>
+        <footer class="mt-auto">
+            <%- include('../partials/footer') %>
+        </footer>
