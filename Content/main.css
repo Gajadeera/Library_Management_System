@@ -3,8 +3,12 @@
     --text-color: #ffffff;
     --landing-page-text-color: #666;
     --navbar-brand-color: #c7fa10;
-    --background-image: url('/Content/imgs/img3.avif');
+    --background-image: url('/Content/imgs/img5.avif');
     --font-family: "Zen Dots", sans-serif;
+}
+
+a {
+    text-decoration: none;
 }
 
 .landing-page-title {

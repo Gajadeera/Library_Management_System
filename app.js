@@ -17,7 +17,6 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
-
 app.use(session({
     secret: 'Univotech',
     resave: false,
@@ -43,6 +42,8 @@ app.get("/", async (req, res) => {
         const shuffledBooks = books.sort(() => 0.5 - Math.random());
         const selectedBooks = shuffledBooks.slice(0, 5);
         res.render("index", { books: selectedBooks, user: req.session.user });
+        selectedBooks.forEach(b => {
+        });
     } catch (err) {
 
         res.status(500).send("Server Error");
@@ -54,11 +55,6 @@ app.use('/books', bookRoutes);
 app.use('/admin', adminRoutes);
 app.use('/borrow', borrowRoutes);
 app.use('/report', reportRoutes);
-
-app.use((req, res, next) => {
-    console.log(`Request URL: ${req.url}`);
-    next();
-});
 
 app.listen(8080, (req, res) => {
     console.log('Server running on port 8080');

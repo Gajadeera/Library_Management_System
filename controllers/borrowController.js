@@ -8,21 +8,19 @@ const makeBorrwow = async (req, res) => {
     }
 
     try {
-        const userId = new mongoose.Types.ObjectId(req.session.user._id); // Use 'new' keyword
+        const userId = new mongoose.Types.ObjectId(req.session.user._id);
         const { bookId } = req.body;
 
-        // Check if book exists
         const book = await Book.findById(bookId);
         if (!book) {
             return res.redirect('/?error=Book not found');
         }
 
-        // Create new borrow record
         const newBorrow = new Borrow({
             user_id: userId,
-            book_id: new mongoose.Types.ObjectId(bookId), // Use 'new' keyword
+            book_id: new mongoose.Types.ObjectId(bookId),
             borrow_date: new Date(),
-            due_date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days from today
+            due_date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
             status: "active",
             fine_amount: 0.0
         });

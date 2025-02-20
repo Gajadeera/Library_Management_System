@@ -41,7 +41,9 @@
 
                 <div class="d-flex">
                     <% if (typeof user !=='undefined' ) { %>
-                        <span class="navbar-text text-light me-3">Welcome Back <%= user.name %></span>
+                        <span class="navbar-text text-light me-3"><a href="users/<%=user._id %>">
+                                Welcome <%= user.name %>
+                            </a> </span>
                         <a href="/users/logout" class="btn btn-light me-2">Logout</a>
                         <% } else { %>
                             <a href="/users/login" class="btn btn-light me-2">Login</a>

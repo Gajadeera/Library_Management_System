@@ -6,7 +6,7 @@
             <p class="text-muted">Manage books, users, and borrow requests with ease!</p>
         </div>
 
-        <!-- Message Box (Hidden Initially) -->
+
         <div id="messageBox"
             style="display: none; padding: 10px; margin-bottom: 10px; border-radius: 5px; max-width: 400px; text-align: center; color: white;">
             <span id="messageText"></span>
@@ -15,8 +15,7 @@
         <div class="Img_container d-flex flex-wrap justify-content-center gap-4">
             <% books.forEach(book=> { %>
                 <div class="item text-center">
-                    <img src="<%= book.imageUrl || 'https://via.placeholder.com/150' %>" alt="<%= book.title %>"
-                        class="img-fluid rounded book-image">
+                    <img src="<%= book.imageUrl %>" alt="<%= book.title %>" class="img-fluid rounded book-image">
                     <h5 class="mt-2">
                         <%= book.title %>
                     </h5>

@@ -4,7 +4,7 @@
         <div class="container py-5">
             <div class="row">
                 <% books.forEach(book=> { %>
-                    <div class="col-lg-4 mb-4">
+                    <div class="col-lg-3 mb-4">
                         <div class="card">
                             <img src="<%= book.imageUrl || 'https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60' %>"
                                 alt="<%= book.title %>" class="card-img-top">
@@ -22,12 +22,12 @@
                                             <input type="hidden" name="bookId" value="<%= book._id %>">
                                             <button type="submit" class="btn btn-primary btn-sm w-100">Borrow</button>
                                         </form>
-
                                         <% if (user.role==='librarian' || user.role==='admin' ||
                                             user.role==='superAdmin' ) { %>
-                                            <a href="/book/edit/<%= book._id %>"
+                                            <a href="/books/edit/<%= book._id %>"
                                                 class="btn btn-outline-warning btn-sm flex-fill w-100">Edit</a>
-                                            <form action="/book/delete/<%= book._id %>" method="POST" class="flex-fill">
+                                            <form action="/books/delete/<%= book._id %>" method="POST"
+                                                class="flex-fill">
                                                 <button type="submit"
                                                     class="btn btn-outline-danger btn-sm w-100">Delete</button>
                                             </form>

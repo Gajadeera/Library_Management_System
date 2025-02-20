@@ -1,68 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Book</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body class="bg-light">
+<%- include('../partials/header') %>
 
     <div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
         <div class="text-center">
-            <h2 class="mb-3">Add New Book</h2>
-            <h4 class="text-muted">Please fill in the details below to add a new book.</h4>
+            <h2 class="mb-3 fw-bold">Add New Book</h2>
+            <p class="text-muted">Fill in the details below to add a new book to the collection.</p>
         </div>
 
-        <div class="card mt-4 shadow-lg" style="max-width: 600px; width: 100%;">
+        <div class="card mt-4 shadow-sm border-0" style="max-width: 600px; width: 100%;">
             <div class="card-body">
                 <form action="/books/add" method="POST">
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" name="title" id="title" class="form-control"
-                            placeholder="Enter the book's title" required>
-                    </div>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="title" class="form-label fw-semibold">Title</label>
+                            <input type="text" name="title" id="title" class="form-control"
+                                placeholder="Enter book title" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="author" class="form-label">Author</label>
-                        <input type="text" name="author" id="author" class="form-control"
-                            placeholder="Enter the author's name" required>
-                    </div>
+                        <div class="col-12">
+                            <label for="author" class="form-label fw-semibold">Author</label>
+                            <input type="text" name="author" id="author" class="form-control"
+                                placeholder="Enter author's name" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="genre" class="form-label">Genre</label>
-                        <input type="text" name="genre" id="genre" class="form-control"
-                            placeholder="Enter the book's genre">
-                    </div>
+                        <div class="col-md-6">
+                            <label for="genre" class="form-label fw-semibold">Genre</label>
+                            <input type="text" name="genre" id="genre" class="form-control"
+                                placeholder="e.g., Fiction, Science">
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="publishedYear" class="form-label">Published Year</label>
-                        <input type="number" name="publishedYear" id="publishedYear" class="form-control"
-                            placeholder="Enter the year of publication">
-                    </div>
+                        <div class="col-md-6">
+                            <label for="publishedYear" class="form-label fw-semibold">Published Year</label>
+                            <input type="number" name="publishedYear" id="publishedYear" class="form-control"
+                                placeholder="e.g., 2022" min="1000" max="9999">
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="availableCopies" class="form-label">Available Copies</label>
-                        <input type="number" name="availableCopies" id="availableCopies" class="form-control"
-                            placeholder="Enter the number of available copies" value="1">
-                    </div>
+                        <div class="col-md-6">
+                            <label for="availableCopies" class="form-label fw-semibold">Available Copies</label>
+                            <input type="number" name="availableCopies" id="availableCopies" class="form-control"
+                                placeholder="Enter number of copies" min="1" value="1">
+                        </div>
 
-                    <!-- Centered buttons -->
-                    <div class="d-flex justify-content-center gap-3">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="/books" class="btn btn-secondary">Cancel</a>
+                        <div class="col-md-6">
+                            <label for="imageUrl" class="form-label fw-semibold">Image URL</label>
+                            <input type="url" name="imageUrl" id="imageUrl" class="form-control"
+                                placeholder="Enter image URL">
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-center gap-3 mt-3">
+                            <button type="submit" class="btn btn-primary px-4">Submit</button>
+                            <a href="/books" class="btn btn-outline-secondary px-4">Cancel</a>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
-
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+    <footer class="mt-auto">
+        <%- include('../partials/footer') %>
+    </footer>

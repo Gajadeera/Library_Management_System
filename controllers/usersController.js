@@ -18,7 +18,7 @@ const createUser = async (req, res) => {
     }
 };
 
-const showCreateUserForm = (req, res) => res.render('user/new');
+const showCreateUserForm = (req, res) => res.render('user/new', { user: req.session.user });
 
 const getUserProfile = async (req, res) => {
     const user = await User.findById(req.params.id);

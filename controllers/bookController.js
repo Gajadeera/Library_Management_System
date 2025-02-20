@@ -12,8 +12,8 @@ const getAllBooks = async (req, res) => {
 
 const addBook = async (req, res) => {
     try {
-        const { title, author, genre, publishedYear, availableCopies } = req.body;
-        const book = new Book({ title, author, genre, publishedYear, availableCopies });
+        const { title, author, genre, publishedYear, availableCopies, imageUrl } = req.body;
+        const book = new Book({ title, author, genre, publishedYear, availableCopies, imageUrl });
         await book.save();
         res.redirect('/books');
     } catch (err) {
@@ -35,7 +35,7 @@ const renderEditBookForm = async (req, res) => {
 const updateBook = async (req, res) => {
     try {
         const { title, author, genre, publishedYear, availableCopies } = req.body;
-        await Book.findByIdAndUpdate(req.params.id, { title, author, genre, publishedYear, availableCopies });
+        await Book.findByIdAndUpdate(req.params.id, { title, author, genre, publishedYear, availableCopies, imageUrl });
         res.redirect('/books');
     } catch (err) {
         res.status(400).send('Error updating book.');
